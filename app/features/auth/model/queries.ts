@@ -1,30 +1,76 @@
-import { useAuthStore } from "@/app/entities/client";
-import { login, register } from "@/app/shared/api/queries";
-
+import { usePrefetchUser } from "@/app/entities/client";
+import { generateAuthCode, signIn } from "@/app/shared/api/queries/auth";
+import { signUp, verifyUser } from "@/app/shared/api/queries/user";
 import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { z } from "zod";
 
-export const useLoginMutation = () => {
-	const router = useRouter();
-	const { setAuth } = useAuthStore((state) => state);
-	return useMutation({
-		mutationFn: login,
-		onSuccess(data) {
-			router.replace("/feed");
-			console.log(data);
-			setAuth(data);
-		},
-	});
+export const useSignInMutation = (onError?: (error: string) => void) => {
+  const router = useRouter();
+
+  return useMutation({
+    mutationFn: signIn,
+    onSuccess() {
+      router.replace("/feed");
+    },
+    onError(error) {
+      onError?.(error.response?.data.error ?? "");
+    },
+  });
 };
-export const useRegisterMutation = () => {
-	const router = useRouter();
-	const { setAuth } = useAuthStore((state) => state);
-	return useMutation({
-		mutationFn: register,
-		onSuccess(data) {
-			router.replace("/feed");
 
-			setAuth(data);
-		},
-	});
+const SignUpResponseSchema = z.object({
+  email: z
+    .string()
+    .min(1, "email is required field")
+    .email("email must be valid"),
+});
+
+export const useSignUpMutation = (onError?: (error: string) => void) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  return useMutation({
+    mutationFn: signUp,
+    onSuccess(data) {
+      SignUpResponseSchema.parse(data);
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("email", data.email);
+      router.push("signUp/verification?" + params.toString());
+    },
+    onError(error) {
+      onError?.(error.response?.data.error ?? "");
+    },
+  });
+};
+
+export const useVerifyUserMutation = (onError?: (error: string) => void) => {
+  const router = useRouter();
+  const prefetchUser = usePrefetchUser();
+  return useMutation({
+    mutationFn: verifyUser,
+    onSuccess() {
+      prefetchUser();
+      router.replace("/feed");
+    },
+    onError(error) {
+      onError?.(error.response?.data.error ?? "");
+    },
+  });
+};
+
+export const useGenerateCodeMutation = (onError?: (error: string) => void) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  return useMutation({
+    mutationFn: generateAuthCode,
+    onSuccess(data) {
+      SignUpResponseSchema.parse(data);
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("email", data.email);
+      router.push("signIn/verification?" + params.toString());
+    },
+    onError(error) {
+      onError?.(error.response?.data.error ?? "");
+    },
+  });
 };

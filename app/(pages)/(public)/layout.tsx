@@ -5,20 +5,21 @@ import { useRouter } from "next/navigation";
 import { ReactNode } from "react";
 
 export default function Layout({ children }: { children: ReactNode }) {
-	const router = useRouter();
-	return (
-		<>
-			<Header
-				rightAction={
-					<Button
-						onClick={() => router.push("/login")}
-						variant="secondary"
-						className="h-8">
-						Login
-					</Button>
-				}
-			/>
-			{children}
-		</>
-	);
+  const router = useRouter();
+  return (
+    <>
+      <Header
+        rightAction={
+          <Button
+            onClick={() => router.push("/signIn")}
+            variant="secondary"
+            className="h-8"
+          >
+            Login
+          </Button>
+        }
+      />
+      {children}
+    </>
+  );
 }
