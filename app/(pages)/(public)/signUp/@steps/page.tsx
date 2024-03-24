@@ -1,4 +1,4 @@
-import { SignUpForm } from "@/app/features/client";
+import { SignUpForm } from "@/app/features";
 
 const SignUpPage = () => {
   return (

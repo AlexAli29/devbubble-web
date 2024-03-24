@@ -1,4 +1,4 @@
-import { SignInForm } from "@/app/features/client";
+import { SignInForm } from "@/app/features";
 
 const SignInPage = () => <SignInForm />;
 

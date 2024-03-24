@@ -3,4 +3,4 @@ export {
   useInvalidateCurrentUser,
   usePrefetchUser,
 } from "./user/model/queries";
-export { UserDropDown } from "./user/ui/user-drop-down";
+export { UserNavBarActions } from "./user/ui/user-nav-bar-actions";

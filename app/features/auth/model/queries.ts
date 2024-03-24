@@ -1,7 +1,11 @@
 import { usePrefetchUser } from "@/app/entities/client";
-import { generateAuthCode, signIn } from "@/app/shared/api/queries/auth";
+import {
+  generateAuthCode,
+  logOut,
+  signIn,
+} from "@/app/shared/api/queries/auth";
 import { signUp, verifyUser } from "@/app/shared/api/queries/user";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter, useSearchParams } from "next/navigation";
 import { z } from "zod";
 
@@ -68,6 +72,21 @@ export const useGenerateCodeMutation = (onError?: (error: string) => void) => {
       const params = new URLSearchParams(searchParams.toString());
       params.set("email", data.email);
       router.push("signIn/verification?" + params.toString());
+    },
+    onError(error) {
+      onError?.(error.response?.data.error ?? "");
+    },
+  });
+};
+
+export const useLogOutMutation = (onError?: (error: string) => void) => {
+  const router = useRouter();
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: logOut,
+    onSuccess() {
+      router.replace("/");
+      queryClient.clear();
     },
     onError(error) {
       onError?.(error.response?.data.error ?? "");
