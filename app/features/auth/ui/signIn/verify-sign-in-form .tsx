@@ -7,6 +7,7 @@ export const VerifySignInForm = () => {
   const { email, control, handleSubmit, errors, isValid } = useVerifySignIn();
   return (
     <VerificationForm
+      backLink="/signIn"
       email={email}
       control={control}
       errors={errors}

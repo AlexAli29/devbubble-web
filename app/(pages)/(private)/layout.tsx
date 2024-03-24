@@ -1,4 +1,4 @@
-import { UserNavBarActions } from "@/app/entities/client";
+import { UserNavBarActions } from "@/app/entities";
 import { LogOutButton } from "@/app/features";
 import { Header } from "@/app/shared/ui/header";
 import { PowerIcon } from "lucide-react";

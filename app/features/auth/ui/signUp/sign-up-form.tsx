@@ -18,7 +18,7 @@ export const SignUpForm = () => {
           className="w-[80%]"
           inputProps={{
             ...register("name"),
-            className: "text-[12px] h-[30px]",
+            className: "text-[14px] h-[40px]",
             placeholder: "Name",
           }}
         />
@@ -27,7 +27,7 @@ export const SignUpForm = () => {
           className="w-[80%]"
           inputProps={{
             ...register("email"),
-            className: "text-[12px] h-[30px]",
+            className: "text-[14px] h-[40px]",
             placeholder: "Email",
           }}
         />

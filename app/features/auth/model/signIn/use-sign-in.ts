@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useGenerateCodeMutation, useSignInMutation } from "../queries";
+import { useGenerateCodeMutation } from "../queries";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";

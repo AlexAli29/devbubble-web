@@ -19,7 +19,7 @@ export const SignInForm = () => {
           className="w-[80%]"
           inputProps={{
             ...register("email"),
-            className: "text-[12px] h-[30px]",
+            className: "text-[14px] h-[40px]",
             placeholder: "Email",
           }}
         />

@@ -16,7 +16,9 @@ export const VerificationForm = ({
   handleSubmit,
   isValid,
   errors,
+  backLink,
 }: {
+  backLink?: string;
   email: string | null;
   control: Control<
     {
@@ -37,12 +39,14 @@ export const VerificationForm = ({
       onSubmit={handleSubmit}
       className="shadow-sm shadow-slate-500 rounded-lg p-6 pt-10 flex flex-col items-center gap-y-6 relative"
     >
-      <Link
-        href={"/signUp"}
-        className=" absolute top-2 left-2 hover:translate-x-[-4px] transition-all"
-      >
-        <ArrowBackIcon className="w-5 h-5" />
-      </Link>
+      {backLink && (
+        <Link
+          href={backLink}
+          className=" absolute top-2 left-2 hover:translate-x-[-4px] transition-all"
+        >
+          <ArrowBackIcon className="w-5 h-5" />
+        </Link>
+      )}
       <div className="flex items-center flex-col gap-y-1">
         <h3 className="font-medium">Please enter code that was send to:</h3>
         <p className="border-[1px] p-1 rounded-lg px-3">{email}</p>

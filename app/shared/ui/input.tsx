@@ -14,7 +14,7 @@ export const Input = ({ error, inputProps, className }: InputProps) => {
         <input
           {...inputProps}
           className={cn(
-            "rounded-md bg-white outline-none border-[0.2px] shadow-none focus:shadow-sm focus:shadow-blue-800  w-full pl-2",
+            "rounded-md bg-white outline-none border-[0.2px] shadow-none focus:shadow-sm focus:shadow-blue-800 text-[16px] h-[40px]  w-full pl-2",
             error &&
               "shadow-red-500 shadow-sm focus:shadow-sm focus:shadow-red-500",
             inputProps?.className

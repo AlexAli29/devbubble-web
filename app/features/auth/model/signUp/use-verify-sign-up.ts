@@ -13,11 +13,9 @@ const VerifySignUpSchema = z.object({
 type VerifySignUp = z.infer<typeof VerifySignUpSchema>;
 export const useVerifySignUp = () => {
   const searchParams = useSearchParams();
-  const router = useRouter();
+
   const email = searchParams.get("email");
-  if (!email) {
-    router.replace("signUp");
-  }
+
   const {
     handleSubmit,
     setError,

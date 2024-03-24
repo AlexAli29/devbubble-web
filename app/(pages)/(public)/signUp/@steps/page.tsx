@@ -1,10 +1,6 @@
 import { SignUpForm } from "@/app/features";
 
 const SignUpPage = () => {
-  return (
-    <>
-      <SignUpForm />
-    </>
-  );
+  return <SignUpForm />;
 };
 export default SignUpPage;

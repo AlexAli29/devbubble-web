@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 import { useForm } from "react-hook-form";
 import { useSignInMutation } from "../queries";
@@ -13,11 +13,9 @@ const VerifySignInSchema = z.object({
 type VerifySignIn = z.infer<typeof VerifySignInSchema>;
 export const useVerifySignIn = () => {
   const searchParams = useSearchParams();
-  const router = useRouter();
+
   const email = searchParams.get("email");
-  if (!email) {
-    router.replace("signUp");
-  }
+
   const {
     handleSubmit,
     setError,

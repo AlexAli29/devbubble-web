@@ -1,4 +1,4 @@
-import { usePrefetchUser } from "@/app/entities/client";
+import { usePrefetchUser } from "@/app/entities";
 import {
   generateAuthCode,
   logOut,
@@ -6,7 +6,7 @@ import {
 } from "@/app/shared/api/queries/auth";
 import { signUp, verifyUser } from "@/app/shared/api/queries/user";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { z } from "zod";
 
 export const useSignInMutation = (onError?: (error: string) => void) => {
@@ -32,12 +32,12 @@ const SignUpResponseSchema = z.object({
 
 export const useSignUpMutation = (onError?: (error: string) => void) => {
   const router = useRouter();
-  const searchParams = useSearchParams();
+
   return useMutation({
     mutationFn: signUp,
     onSuccess(data) {
       SignUpResponseSchema.parse(data);
-      const params = new URLSearchParams(searchParams.toString());
+      const params = new URLSearchParams();
       params.set("email", data.email);
       router.push("signUp/verification?" + params.toString());
     },
@@ -64,12 +64,12 @@ export const useVerifyUserMutation = (onError?: (error: string) => void) => {
 
 export const useGenerateCodeMutation = (onError?: (error: string) => void) => {
   const router = useRouter();
-  const searchParams = useSearchParams();
+
   return useMutation({
     mutationFn: generateAuthCode,
     onSuccess(data) {
       SignUpResponseSchema.parse(data);
-      const params = new URLSearchParams(searchParams.toString());
+      const params = new URLSearchParams();
       params.set("email", data.email);
       router.push("signIn/verification?" + params.toString());
     },

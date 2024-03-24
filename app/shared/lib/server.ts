@@ -1,4 +1,3 @@
-import axios from "axios";
 import { NextRequest } from "next/server";
 
 export const checkSession = async (request: NextRequest) => {
