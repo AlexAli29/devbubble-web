@@ -1,0 +1,19 @@
+services:
+  web:
+    container_name: web
+    build:
+      context: .
+      target: runner
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env.production
+    restart: always
+  # storybook:
+  #   container_name: storybook
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.storybook
+  #   ports:
+  #     - '6006:6006'
+  #   restart: always
