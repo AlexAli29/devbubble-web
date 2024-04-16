@@ -2,17 +2,17 @@ import { getCurrentUser } from "@/app/shared/api/queries/user";
 import { userSchema } from "@/app/shared/types/user";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-const userKey = ["current-user"];
+const userKey = "current-user";
 
 export const useUserQuery = () =>
   useQuery({
-    queryKey: userKey,
+    queryKey: [userKey],
     staleTime: 60 * 1000,
     retry: false,
     queryFn: async () => {
       const user = await getCurrentUser();
-      userSchema.parse(user);
-      return user;
+
+      return userSchema.parse(user);
     },
   });
 
@@ -30,7 +30,7 @@ export const usePrefetchUser = () => {
 
   return () =>
     queryClient.prefetchQuery({
-      queryKey: userKey,
+      queryKey: [userKey],
       staleTime: 60 * 1000,
       retry: false,
       queryFn: async () => {

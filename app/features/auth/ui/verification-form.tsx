@@ -1,5 +1,6 @@
 import { Button } from "@/app/shared/ui/button";
-import { ArrowBackIcon } from "@/app/shared/ui/icons/arrow-back";
+import { ArrowBackIcon } from "@/app/shared/ui/icons";
+
 import {
   InputOTP,
   InputOTPGroup,

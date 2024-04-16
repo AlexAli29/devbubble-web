@@ -1,4 +1,4 @@
 const ConnectionsPage = () => {
-  return <div>Following</div>;
+  return <div>Profile</div>;
 };
 export default ConnectionsPage;

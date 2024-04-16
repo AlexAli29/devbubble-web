@@ -20,7 +20,7 @@ export type VerifyUserDto = {
 };
 
 export const verifyUser = (
-  verifyUserBody: BodyType<VerifyUserDto>,
+  payload: BodyType<VerifyUserDto>,
   options?: SecondParameter<typeof createInstance>
 ) => {
   return createInstance(
@@ -28,7 +28,7 @@ export const verifyUser = (
       url: `/user/verify`,
       method: "post",
       headers: { "Content-Type": "application/json" },
-      data: verifyUserBody,
+      data: payload,
     },
     options
   );
@@ -40,7 +40,7 @@ export type SignUpBodyDto = {
 };
 
 export const signUp = (
-  signInBody: BodyType<SignUpBodyDto>,
+  payload: BodyType<SignUpBodyDto>,
   options?: SecondParameter<typeof createInstance>
 ) => {
   return createInstance<{ email: string }>(
@@ -48,7 +48,28 @@ export const signUp = (
       url: `/user/signUp`,
       method: "post",
       headers: { "Content-Type": "application/json" },
-      data: signInBody,
+      data: payload,
+    },
+    options
+  );
+};
+
+export type UpdateUserDto = {
+  id: string;
+  name: string;
+  description?: string;
+};
+
+export const updateUser = (
+  payload: BodyType<UpdateUserDto>,
+  options?: SecondParameter<typeof createInstance>
+) => {
+  return createInstance<void>(
+    {
+      url: `/user/`,
+      method: "patch",
+      headers: { "Content-Type": "application/json" },
+      data: payload,
     },
     options
   );

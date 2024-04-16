@@ -1,19 +1,18 @@
 "use client";
-import { Avatar } from "@/app/shared/ui/avatar";
 
-import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { useUserQuery } from "../model/queries";
-import { BellIcon } from "@/app/shared/ui/icons/bell";
+
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/app/shared/ui/popover";
-import { UserCircle } from "@/app/shared/ui/icons/user-circle";
 
 import Link from "next/link";
 import { ReactNode } from "react";
 import { UserAvatar } from "../../../shared/ui/user-avatar";
+import { BellIcon } from "@/app/shared/ui/icons";
+import { UserCircle } from "lucide-react";
 
 export const UserNavBarActions = ({ logOut }: { logOut?: ReactNode }) => {
   const { data, isLoading } = useUserQuery();
